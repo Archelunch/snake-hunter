@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://x7w46ot51k13"]
+
+[ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="1_6e3dd"]
+[ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="2_4yahd"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rfrep"]
+
+[sub_resource type="Gradient" id="Gradient_u1lar"]
+offsets = PackedFloat32Array(0, 0.689046, 0.805654, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.964706, 0, 0.682353, 0.721569, 0.986606, 0.657213, 0.876707, 0.85002, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uicf6"]
+gradient = SubResource("Gradient_u1lar")
+
+[sub_resource type="Curve" id="Curve_o0uel"]
+_data = [Vector2(0, 0.309091), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_m1hb7"]
+max_value = 2.0
+_data = [Vector2(0, 0.236364), 0.0, 0.0, 0, 0, Vector2(0.115702, 0.436364), 0.0, 0.0, 0, 0, Vector2(1, 0.981818), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_sepq2"]
+_data = [Vector2(0, 0.436364), 0.0, -2.56667, 0, 0, Vector2(0.165289, 0.0727272), 0.0, 0.0, 0, 0, Vector2(0.290909, 0), 0.0, 0.0, 0, 0, Vector2(0.642975, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_5qplu"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.579812, -0.0181818), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Cross" type="Node2D"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_rfrep")
+position = Vector2(0.000976563, -0.00012207)
+script = ExtResource("1_6e3dd")
+num_particles = 1
+lifetime = 0.75
+texture = ExtResource("2_4yahd")
+image_scale = 11.455
+gradient = SubResource("GradientTexture1D_uicf6")
+blend_mode = 1
+angle_degrees = 100.0
+direction = Vector2(0, 1)
+distance = 0.0
+distance_randomness = 0.667
+global_offset = true
+spread_degrees = 101.455
+percent_force_uniform = 27.778
+scale_curve = SubResource("Curve_o0uel")
+x_scale_curve = SubResource("Curve_m1hb7")
+y_scale_curve = SubResource("Curve_sepq2")
+color_offset_curve = SubResource("Curve_5qplu")

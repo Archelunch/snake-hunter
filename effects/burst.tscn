@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://l8i57qkosn4f"]
+
+[ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="1_xh7kl"]
+[ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="2_08gwd"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rfrep"]
+
+[sub_resource type="Gradient" id="Gradient_iq2pm"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.223602, 0.47205, 0.812865, 1)
+colors = PackedColorArray(0.356863, 0.580392, 0.737255, 0, 0.87834, 0.46543, 0.362065, 0.839216, 1, 0.759812, 0.187012, 0.972359, 1, 0.930167, 0.403123, 1, 0.984314, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8aiha"]
+gradient = SubResource("Gradient_iq2pm")
+
+[sub_resource type="Curve" id="Curve_hypru"]
+_data = [Vector2(0, 0), 0.0, 1.93319, 0, 0, Vector2(0.150413, 0.518182), 2.29167, 2.29167, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_akhax"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.881818), 2.73369, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_mk6nw"]
+max_value = 2.0
+_data = [Vector2(0, 0.927273), 0.0, 0.0, 0, 0, Vector2(0.547107, 0.236364), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_sb3ca"]
+_data = [Vector2(0, 0.990909), 0.0, 0.0, 0, 0, Vector2(1, 0.663636), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_5r37m"]
+_data = [Vector2(0, 0.290909), 0.0, 0.0, 0, 0, Vector2(1, 0.745454), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_hu2mi"]
+_data = [Vector2(0, 0), 0.0, 8.69388, 0, 1, Vector2(0.115023, 1), -0.252569, -0.252569, 0, 0, Vector2(1, 0), -1.12997, 0.0, 1, 0]
+point_count = 3
+
+[node name="Burst" type="Node2D"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_rfrep")
+position = Vector2(0.000976563, 0)
+script = ExtResource("1_xh7kl")
+num_particles = 32
+lifetime = 0.75
+lifetime_randomness = 0.745
+preprocess_amount = 0.023
+texture = ExtResource("2_08gwd")
+image_scale = 0.173
+image_scale_randomness = 0.7
+gradient = SubResource("GradientTexture1D_8aiha")
+direction_rotation_randomness = 1.0
+distance = 2115.85
+distance_randomness = 1.0
+offset = Vector2(0, -300)
+global_offset = true
+start_radius = 126.063
+distance_curve = SubResource("Curve_hypru")
+offset_curve = SubResource("Curve_akhax")
+scale_curve = SubResource("Curve_mk6nw")
+x_scale_curve = SubResource("Curve_sb3ca")
+y_scale_curve = SubResource("Curve_5r37m")
+color_offset_curve = SubResource("Curve_hu2mi")

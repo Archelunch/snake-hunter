@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://chgw4icf4svpw"]
+
+[ext_resource type="Script" path="res://Actors/BaseEnemy.gd" id="1_ekun7"]
+[ext_resource type="Texture2D" uid="uid://dddpf81pqe25v" path="res://assets/units/AdeptNecromancerIdle.png" id="1_jmato"]
+[ext_resource type="Script" path="res://addons/health_component/health_component.gd" id="2_i13v7"]
+[ext_resource type="Script" path="res://addons/motion2d/movement/top_down_movement.gd" id="3_vp1co"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ubpl6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2h74"]
+atlas = ExtResource("1_jmato")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53j7x"]
+atlas = ExtResource("1_jmato")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ahuj"]
+atlas = ExtResource("1_jmato")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tka0"]
+atlas = ExtResource("1_jmato")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dn78u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2h74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53j7x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ahuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tka0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BaseEnemy" type="CharacterBody2D" node_paths=PackedStringArray("movement_component", "health_component") groups=["mobs"]]
+scale = Vector2(3, 3)
+script = ExtResource("1_ekun7")
+movement_component = NodePath("GodotParadiseTopDownMovement")
+health_component = NodePath("GodotParadiseHealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ubpl6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.18667, 1.18667)
+sprite_frames = SubResource("SpriteFrames_dn78u")
+
+[node name="GodotParadiseHealthComponent" type="Node" parent="."]
+script = ExtResource("2_i13v7")
+MAX_HEALTH = 10
+CURRENT_HEALTH = 10
+
+[node name="GodotParadiseTopDownMovement" type="Node2D" parent="."]
+script = ExtResource("3_vp1co")

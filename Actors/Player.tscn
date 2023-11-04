@@ -1,0 +1,204 @@
+[gd_scene load_steps=29 format=3 uid="uid://dskw1o7jcqugs"]
+
+[ext_resource type="Script" path="res://addons/motion2d/movement/top_down_movement.gd" id="1_bvao5"]
+[ext_resource type="Script" path="res://Actors/Player.gd" id="1_wyfif"]
+[ext_resource type="Script" path="res://addons/health_component/health_component.gd" id="2_84cwx"]
+[ext_resource type="PackedScene" uid="uid://bo0bcjocg7r2i" path="res://Actors/Bullet.tscn" id="2_c2xav"]
+[ext_resource type="Texture2D" uid="uid://bcpna5dcbrn2b" path="res://assets/units/soldier-walking.png" id="3_3xj4l"]
+[ext_resource type="PackedScene" uid="uid://bcrunk5chra72" path="res://effects/shotback.tscn" id="3_lne8y"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="4_i25ox"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_uoido"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a0ys7"]
+radius = 30.0
+height = 90.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iy2e"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(0, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdjk0"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(311, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqxf5"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(622, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46vpn"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(933, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53fky"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(1244, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuunr"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(1555, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80d2j"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(1866, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwitk"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(2177, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qokso"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(2488, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsmny"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(2799, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3xof"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(3110, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66k2o"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(3421, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f613g"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(3732, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf1e5"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(4043, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x11d4"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(4354, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xb6w"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(4665, 0, 311, 368)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f72v0"]
+atlas = ExtResource("3_3xj4l")
+region = Rect2(4976, 0, 311, 368)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3tv02"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2iy2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdjk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqxf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46vpn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53fky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wuunr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80d2j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwitk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qokso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsmny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3xof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66k2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f613g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf1e5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x11d4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xb6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f72v0")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_y5g68"]
+script = ExtResource("5_uoido")
+duration = 1.0
+transition = 0
+ease = 2
+
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("movement_component", "health_component")]
+script = ExtResource("1_wyfif")
+movement_component = NodePath("GodotParadiseTopDownMovement")
+health_component = NodePath("GodotParadiseHealthComponent")
+Bullet = ExtResource("2_c2xav")
+ShotVFX = ExtResource("3_lne8y")
+
+[node name="GodotParadiseHealthComponent" type="Node" parent="."]
+script = ExtResource("2_84cwx")
+
+[node name="GodotParadiseTopDownMovement" type="Node2D" parent="."]
+script = ExtResource("1_bvao5")
+MAX_SPEED = 250.0
+ACCELERATION = 200.0
+FRICTION = 2.08165e-12
+AIR_FRICTION_HORIZONTAL_FACTOR = 0.0
+AIR_FRICTION_VERTICAL_FACTOR = 0.0
+DASH_SPEED_MULTIPLIER = 1.6
+dash_duration = 0.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 19)
+rotation = 1.5708
+scale = Vector2(2.44, 1.88963)
+shape = SubResource("CapsuleShape2D_a0ys7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, 3)
+rotation = 1.5708
+scale = Vector2(0.680001, 0.544)
+sprite_frames = SubResource("SpriteFrames_3tv02")
+animation = &"walk"
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+visible = false
+script = ExtResource("4_i25ox")
+priority_override = null
+priority = 0
+zoom = Vector2(1, 1)
+follow_mode = 1
+follow_target = NodePath("")
+tween_parameters = SubResource("Resource_y5g68")
+tween_on_load = true
+inactive_update_mode = 0
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(94, 33)
+
+[node name="Gunback" type="Marker2D" parent="."]
+position = Vector2(38, 47)
+scale = Vector2(0.1, 0.1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.8, 0.8)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
