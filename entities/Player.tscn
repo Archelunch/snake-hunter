@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dskw1o7jcqugs"]
+[gd_scene load_steps=31 format=3 uid="uid://dskw1o7jcqugs"]
 
 [ext_resource type="Script" path="res://entities/Player.gd" id="1_flbdl"]
 [ext_resource type="PackedScene" uid="uid://bo0bcjocg7r2i" path="res://entities/Bullet.tscn" id="2_yvyka"]
@@ -6,8 +6,10 @@
 [ext_resource type="Script" path="res://addons/health_component/health_component.gd" id="4_hdcws"]
 [ext_resource type="Script" path="res://addons/motion2d/movement/top_down_movement.gd" id="5_3op7r"]
 [ext_resource type="Texture2D" uid="uid://bcpna5dcbrn2b" path="res://assets/units/soldier-walking.png" id="6_efy1o"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_lks3v"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="7_r1esn"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_g6ksq"]
+[ext_resource type="Script" path="res://entities/ShakerComponent2D.gd" id="10_nqyul"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a0ys7"]
 radius = 30.0
@@ -140,9 +142,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Resource" id="Resource_y5g68"]
+[sub_resource type="Resource" id="Resource_854sq"]
 script = ExtResource("8_g6ksq")
-duration = 1.0
+duration = 0.1
 transition = 0
 ease = 2
 
@@ -159,12 +161,13 @@ script = ExtResource("4_hdcws")
 [node name="GodotParadiseTopDownMovement" type="Node2D" parent="."]
 script = ExtResource("5_3op7r")
 MAX_SPEED = 250.0
-ACCELERATION = 200.0
-FRICTION = 2.08165e-12
+ACCELERATION = 250.0
+FRICTION = 900.0
 AIR_FRICTION_HORIZONTAL_FACTOR = 0.0
 AIR_FRICTION_VERTICAL_FACTOR = 0.0
-DASH_SPEED_MULTIPLIER = 1.6
-dash_duration = 0.2
+DEFAULT_TEMPORARY_SPEED_TIME = 1.0
+dash_cooldown = 1.2
+dash_duration = 0.05
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 19)
@@ -179,18 +182,6 @@ scale = Vector2(0.680001, 0.544)
 sprite_frames = SubResource("SpriteFrames_3tv02")
 animation = &"walk"
 
-[node name="PhantomCamera2D" type="Node2D" parent="."]
-visible = false
-script = ExtResource("7_r1esn")
-priority_override = null
-priority = 0
-zoom = Vector2(1, 1)
-follow_mode = 1
-follow_target = NodePath("")
-tween_parameters = SubResource("Resource_y5g68")
-tween_on_load = true
-inactive_update_mode = 0
-
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(94, 33)
 
@@ -199,6 +190,46 @@ position = Vector2(38, 47)
 scale = Vector2(0.1, 0.1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+offset = Vector2(2.08165e-12, 2.08165e-12)
 zoom = Vector2(0.8, 0.8)
+process_callback = 0
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("7_lks3v")
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("7_r1esn")
+priority_override = null
+priority = 1
+zoom = Vector2(0.8, 0.8)
+follow_mode = 5
+follow_target = NodePath("..")
+follow_parameters/target_offset = Vector2(2.08165e-12, 2.08165e-12)
+follow_parameters/damping = true
+follow_parameters/damping_value = 10.0
+follow_parameters/dead_zone_horizontal = 0.2
+follow_parameters/dead_zone_vertical = 0.2
+follow_parameters/viewfinder_in_play = false
+tween_parameters = SubResource("Resource_854sq")
+tween_on_load = false
+inactive_update_mode = 0
+
+[node name="ShakerComponent2D" type="Node2D" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("10_nqyul")
+decay = 0.5
+max_offset = Vector2(100, 100)
+max_roll = 0.25
+trauma_power = 3
+camera = NodePath("../Camera2D")

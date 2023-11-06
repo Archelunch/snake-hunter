@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var ShotVFX : PackedScene
-@export var speed = 1500
+@export var speed = 2000
 @export var damage : int = 5
 
 func _physics_process(delta):
@@ -15,6 +15,6 @@ func _on_body_entered(body):
 		var shot_vfx = ShotVFX.instantiate()
 		get_parent().add_child(shot_vfx)
 		shot_vfx.transform = body.global_transform
-		shot_vfx.scale = Vector2(0.1,0.1)
+		shot_vfx.scale = Vector2(0.2,0.2)
 		body.damage(damage)
 		queue_free()

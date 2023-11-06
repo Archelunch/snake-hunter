@@ -63,3 +63,5 @@ sprite_frames = SubResource("SpriteFrames_dn78u")
 
 [node name="GodotParadiseTopDownMovement" type="Node2D" parent="."]
 script = ExtResource("4_xko7k")
+
+[connection signal="died" from="GodotParadiseHealthComponent" to="." method="_on_died"]

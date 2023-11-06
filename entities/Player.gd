@@ -19,14 +19,13 @@ func _ready():
 func _physics_process(delta):
 	look_at(get_global_mouse_position())
 	var direction = Input.get_vector("left", "right", "up", "down")
-	if direction != Vector2.ZERO:
+	if Input.is_action_just_pressed("dash"):
+		movement_component.dash()
+	elif direction != Vector2.ZERO and !movement_component.is_dashing:
 		movement_component.accelerate(direction, delta)
-	else:
-		movement_component.decelerate(delta, true)
-	if Input.is_action_pressed("dash"):
-		movement_component.dash(position.direction_to(get_global_mouse_position()))
+	elif !movement_component.is_dashing:
+		movement_component.decelerate(delta)
 	movement_component.move()
-
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
 		
@@ -37,5 +36,6 @@ func shoot():
 	var shot_vfx = ShotVFX.instantiate()
 	owner.add_child(shot_vfx)
 	shot_vfx.transform = $Gunback.global_transform
+	EventBus.publish("camera_shake", 0.45)
 	
 	
