@@ -146,7 +146,7 @@ duration = 1.0
 transition = 0
 ease = 2
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("movement_component", "health_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_component", "health_component")]
 script = ExtResource("1_flbdl")
 movement_component = NodePath("GodotParadiseTopDownMovement")
 health_component = NodePath("GodotParadiseHealthComponent")

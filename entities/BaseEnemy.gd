@@ -9,8 +9,10 @@ func _ready():
 	pass
 
 func _process(delta):
-	if health_component.check_is_dead():
-		queue_free()
+	if health_component:
+		if health_component.check_is_dead():
+			queue_free()
 
 func damage(amount: int):
-	health_component.damage(amount)
+	if health_component:
+		health_component.damage(amount)

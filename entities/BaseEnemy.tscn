@@ -52,14 +52,14 @@ health_component = NodePath("GodotParadiseHealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ubpl6")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.18667, 1.18667)
-sprite_frames = SubResource("SpriteFrames_dn78u")
-
 [node name="GodotParadiseHealthComponent" type="Node" parent="."]
 script = ExtResource("3_gghv0")
 MAX_HEALTH = 10
 CURRENT_HEALTH = 10
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.18667, 1.18667)
+sprite_frames = SubResource("SpriteFrames_dn78u")
 
 [node name="GodotParadiseTopDownMovement" type="Node2D" parent="."]
 script = ExtResource("4_xko7k")
