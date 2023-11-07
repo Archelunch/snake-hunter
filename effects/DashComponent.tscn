@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dw7far7e5xfe0"]
+
+[ext_resource type="Script" path="res://effects/DashComponent.gd" id="1_qshnf"]
+
+[node name="DashComponent" type="Node2D"]
+modulate = Color(0.403922, 0.403922, 0.403922, 1)
+show_behind_parent = true
+script = ExtResource("1_qshnf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+light_mask = 2
+visibility_layer = 2
