@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://di4go3mxnauof"]
+
+[ext_resource type="Script" path="res://entities/weapon/Laser.gd" id="1_m855a"]
+[ext_resource type="Texture2D" uid="uid://dxhuqdf7amfov" path="res://assets/objects/Laser_Gauss_WideNose.png" id="2_pthp0"]
+[ext_resource type="PackedScene" uid="uid://cpegytyd2mch0" path="res://entities/weapon/LaserLine.tscn" id="3_13v1x"]
+
+[node name="Laser" type="Node2D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_m855a")
+damage = 1
+magazine_size_max = 1
+reload_time = 0.1
+Bullet = ExtResource("3_13v1x")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_pthp0")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(62, 28)

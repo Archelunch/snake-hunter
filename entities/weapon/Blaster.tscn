@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwpvhe53rcnkx"]
+
+[ext_resource type="Script" path="res://entities/weapon/Blaster.gd" id="1_6ttmn"]
+[ext_resource type="PackedScene" uid="uid://bo0bcjocg7r2i" path="res://entities/weapon/Bullet.tscn" id="2_0nv3j"]
+[ext_resource type="Texture2D" uid="uid://dgyyc4g23ayfd" path="res://assets/objects/Rifle_ice.png" id="2_3e2de"]
+[ext_resource type="PackedScene" uid="uid://bcrunk5chra72" path="res://effects/shotback.tscn" id="3_8j6b5"]
+
+[node name="Blaster" type="Node2D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_6ttmn")
+damage = 5
+speed_type = 1
+projectile_speed = 2000
+magazine_size_max = 10
+reload_time = 0.5
+Bullet = ExtResource("2_0nv3j")
+SpawnVFX = ExtResource("3_8j6b5")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_3e2de")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(57, 30)
+
+[node name="Gunback" type="Marker2D" parent="."]
+position = Vector2(-4, 27)
+scale = Vector2(0.2, 0.2)

@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://qc7wolwaxknu"]
+
+[ext_resource type="Script" path="res://entities/weapon/Shotgun.gd" id="1_lgxbv"]
+[ext_resource type="Texture2D" uid="uid://coe030dl7fio0" path="res://assets/objects/Heavy3.png" id="2_dejop"]
+[ext_resource type="PackedScene" uid="uid://bo0bcjocg7r2i" path="res://entities/weapon/Bullet.tscn" id="2_yuta4"]
+[ext_resource type="PackedScene" uid="uid://bcrunk5chra72" path="res://effects/shotback.tscn" id="3_b63vk"]
+
+[node name="Shotgun" type="Node2D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_lgxbv")
+bullet_life_time = 0.3
+damage = 2
+speed_type = 1
+projectile_speed = 4000
+magazine_size_max = 5
+reload_time = 1.5
+Bullet = ExtResource("2_yuta4")
+SpawnVFX = ExtResource("3_b63vk")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_dejop")
+
+[node name="Muzzles" type="Node2D" parent="."]
+
+[node name="Muzzle" type="Marker2D" parent="Muzzles"]
+position = Vector2(66, 17)
+rotation = -0.261799
+scale = Vector2(0.3, 0.3)
+
+[node name="Muzzle2" type="Marker2D" parent="Muzzles"]
+position = Vector2(66, 26)
+scale = Vector2(0.3, 0.3)
+
+[node name="Muzzle3" type="Marker2D" parent="Muzzles"]
+position = Vector2(66, 34)
+rotation = 0.261799
+scale = Vector2(0.3, 0.3)
+
+[node name="Gunback" type="Marker2D" parent="."]
+position = Vector2(-14, 21)
+scale = Vector2(0.2, 0.2)

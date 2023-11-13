@@ -1,7 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://dskw1o7jcqugs"]
+[gd_scene load_steps=35 format=3 uid="uid://dskw1o7jcqugs"]
 
 [ext_resource type="Script" path="res://entities/Player.gd" id="1_flbdl"]
-[ext_resource type="PackedScene" uid="uid://bo0bcjocg7r2i" path="res://entities/Bullet.tscn" id="2_yvyka"]
+[ext_resource type="PackedScene" uid="uid://bo0bcjocg7r2i" path="res://entities/weapon/Bullet.tscn" id="2_i515x"]
 [ext_resource type="PackedScene" uid="uid://bcrunk5chra72" path="res://effects/shotback.tscn" id="3_s7cl2"]
 [ext_resource type="Script" path="res://addons/health_component/health_component.gd" id="4_hdcws"]
 [ext_resource type="PackedScene" uid="uid://dw7far7e5xfe0" path="res://effects/DashComponent.tscn" id="4_pkmqk"]
@@ -11,6 +11,9 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="7_r1esn"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_g6ksq"]
 [ext_resource type="Script" path="res://entities/ShakerComponent2D.gd" id="10_nqyul"]
+[ext_resource type="PackedScene" uid="uid://cwpvhe53rcnkx" path="res://entities/weapon/Blaster.tscn" id="12_yl53u"]
+[ext_resource type="PackedScene" uid="uid://qc7wolwaxknu" path="res://entities/weapon/Shotgun.tscn" id="13_xsea8"]
+[ext_resource type="PackedScene" uid="uid://di4go3mxnauof" path="res://entities/weapon/Laser.tscn" id="14_h13qw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a0ys7"]
 radius = 30.0
@@ -149,13 +152,14 @@ duration = 0.1
 transition = 0
 ease = 2
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_component", "health_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_component", "health_component", "attached_weapons")]
 script = ExtResource("1_flbdl")
 movement_component = NodePath("GodotParadiseTopDownMovement")
 health_component = NodePath("GodotParadiseHealthComponent")
-Bullet = ExtResource("2_yvyka")
+Bullet = ExtResource("2_i515x")
 ShotVFX = ExtResource("3_s7cl2")
 DashVFX = ExtResource("4_pkmqk")
+attached_weapons = [NodePath("Blaster"), NodePath("Shotgun"), NodePath("Laser")]
 
 [node name="GodotParadiseHealthComponent" type="Node" parent="."]
 script = ExtResource("4_hdcws")
@@ -185,18 +189,10 @@ scale = Vector2(0.680001, 0.544)
 sprite_frames = SubResource("SpriteFrames_3tv02")
 animation = &"walk"
 
-[node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(94, 33)
-
-[node name="Gunback" type="Marker2D" parent="."]
-position = Vector2(38, 47)
-scale = Vector2(0.1, 0.1)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2.08165e-12, 2.08165e-12)
 offset = Vector2(2.08165e-12, 2.08165e-12)
 zoom = Vector2(0.8, 0.8)
-process_callback = 0
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
@@ -239,6 +235,17 @@ camera = NodePath("../Camera2D")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.108
+
+[node name="Blaster" parent="." instance=ExtResource("12_yl53u")]
+position = Vector2(60, 2)
+
+[node name="Shotgun" parent="." instance=ExtResource("13_xsea8")]
+visible = false
+position = Vector2(60, 2)
+
+[node name="Laser" parent="." instance=ExtResource("14_h13qw")]
+visible = false
+position = Vector2(49, -2)
 
 [connection signal="dashed" from="GodotParadiseTopDownMovement" to="." method="_on_dashed"]
 [connection signal="finished_dash" from="GodotParadiseTopDownMovement" to="." method="_on_finished_dash"]

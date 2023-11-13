@@ -10,6 +10,9 @@ const SPEED = 300.0
 @export var ShotVFX : PackedScene
 @export var DashVFX: PackedScene
 
+@export var attached_weapons: Array[WeaponComponent]
+@export var weapon_id: int = 0
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animated_sprite = $AnimatedSprite2D
@@ -31,8 +34,17 @@ func _input(event):
 		shoot()
 	if event.is_action_pressed("dash"):
 		movement_component.dash()
-		#dash()
+	if event.is_action_pressed("reload"):
+		attached_weapons[weapon_id].reload()
+	if event.is_action_pressed("1") or event.is_action_pressed("2") or event.is_action_pressed("3"):
+		change_weapon(int(event.as_text())-1)
 	
+
+func change_weapon(weapon_type):
+	attached_weapons[weapon_id].visible = false
+	weapon_id = weapon_type
+	attached_weapons[weapon_id].visible = true
+
 func dash_effect():
 	var current_texture = $AnimatedSprite2D.sprite_frames.get_frame_texture("walk", $AnimatedSprite2D.frame)
 	var dash_vfx = DashVFX.instantiate()
@@ -43,13 +55,8 @@ func _on_timer_timeout():
 	dash_effect()
 
 func shoot():
-	var b = Bullet.instantiate()
-	owner.add_child(b)
-	b.transform = $Muzzle.global_transform
-	var shot_vfx = ShotVFX.instantiate()
-	owner.add_child(shot_vfx)
-	shot_vfx.transform = $Gunback.global_transform
-	EventBus.publish("camera_shake", 0.45)
+	if attached_weapons:
+		attached_weapons[weapon_id].shoot()
 
 func _on_dashed(position):
 	dash_effect()
