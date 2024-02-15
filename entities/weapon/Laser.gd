@@ -8,4 +8,5 @@ func shoot_process():
 	add_child(b)
 	b.global_transform = muzzle.global_transform
 	b.set_is_casting(true)
+	b.init(damage)
 	EventBus.publish("camera_shake", camera_shake)

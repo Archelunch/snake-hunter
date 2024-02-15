@@ -4,7 +4,6 @@ extends WeaponComponent
 
 func shoot_process():
 	var b = Bullet.instantiate()
-	print(damage, projectile_speed)
 	get_tree().root.add_child(b)
 	b.init(damage, projectile_speed)
 	b.transform = $Muzzle.global_transform

@@ -1,31 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbnu50rk4x4st"]
+[gd_scene load_steps=5 format=3 uid="uid://dbnu50rk4x4st"]
 
 [ext_resource type="PackedScene" uid="uid://dskw1o7jcqugs" path="res://entities/Player.tscn" id="1_bmh0p"]
+[ext_resource type="Script" path="res://Game.gd" id="1_lmia1"]
 [ext_resource type="PackedScene" uid="uid://chgw4icf4svpw" path="res://entities/BaseEnemy.tscn" id="2_urudd"]
 
-[node name="Game" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_nu3wd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -362, -301, 0, 0, 0, 0, 1279, -309, 0, 0, 0, 0, 1316, 156, 0, 0, 0, 0, 1291, 792, 0, 0, 0, 0, 680, 878, 0, 0, 0, 0, 238, 926, 0, 0, 0, 0, -326, 730, 0, 0, 0, 0, -503, 499, 0, 0, 0, 0, -536, -88, 0, 0, 0, 0, -362, -301)
+}
+point_count = 10
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_bmh0p")]
+[node name="Game" type="Node2D"]
+script = ExtResource("1_lmia1")
+mob_scene = ExtResource("2_urudd")
+
+[node name="Player" parent="." instance=ExtResource("1_bmh0p")]
 position = Vector2(457, 244)
 scale = Vector2(0.5, 0.5)
 
-[node name="BaseEnemy" parent="." instance=ExtResource("2_urudd")]
-position = Vector2(942, 280)
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_nu3wd")
 
-[node name="BaseEnemy2" parent="." instance=ExtResource("2_urudd")]
-position = Vector2(942, 640)
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2(-362, -301)
+rotation = -0.00487504
 
-[node name="BaseEnemy3" parent="." instance=ExtResource("2_urudd")]
-position = Vector2(636, 640)
+[node name="MobTimer" type="Timer" parent="."]
+autostart = true
 
-[node name="BaseEnemy4" parent="." instance=ExtResource("2_urudd")]
-position = Vector2(636, 463)
-
-[node name="BaseEnemy5" parent="." instance=ExtResource("2_urudd")]
-position = Vector2(199, 463)
-
-[node name="BaseEnemy6" parent="." instance=ExtResource("2_urudd")]
-position = Vector2(199, 685)
-
-[node name="BaseEnemy7" parent="." instance=ExtResource("2_urudd")]
-position = Vector2(199, 77)
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

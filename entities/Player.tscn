@@ -179,7 +179,7 @@ dash_duration = 0.2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 19)
 rotation = 1.5708
-scale = Vector2(2.44, 1.88963)
+scale = Vector2(1.48, 1.44963)
 shape = SubResource("CapsuleShape2D_a0ys7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
